@@ -1,0 +1,9 @@
+{
+	"name": "appPhrase-node-manager",
+	"description": "Manage the i18n info population into different projects and platforms, from appPhrase.com",
+	"dependencies": {
+	  "lodash": ">= 0.0.1",
+	  "node-CommandLine": ">= 0.0.1",
+	  "stdio":   ">= 0.0.1"
+	}
+}

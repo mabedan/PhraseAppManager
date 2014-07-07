@@ -1,0 +1,29 @@
+{
+	"platforms" : {
+		"ios" : {
+			"folder" : "my-iOS-files",//can be overriden in localConfig.json (in .gitignore)
+			"format" : "strings",
+			"tags" : [
+				{
+					"name" : "iphone-storyboard",
+					"destinationFolder": "MyProject/<locale>.lproj/Main_iPhone.<format>"
+				},
+				{
+					"name" : "in-source",
+					"destinationFolder": "MyProject/<locale>.lproj/Localizable.<format>"
+				}
+			]
+		},
+		"android": {
+			"folder": "my-Android-files",
+			"format": "xml",
+			"tags" : [
+				{
+					"name" : "iphone-storyboard",
+					"destinationFolder": "MyProject/res/values<locale>/strings.<format>"
+				}
+			]
+		}
+	},
+	"locales" : ["fr", "en"]
+}

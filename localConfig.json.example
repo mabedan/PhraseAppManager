@@ -1,0 +1,7 @@
+{
+	"platforms" : {
+		"ios" : {
+			"folder" : "different/path/example/ios"
+		}
+	}
+}
