@@ -54,6 +54,11 @@ var returnObject = {
 						return false;
 					}
 				});
+				_.each(localConfig.platforms, function (platform, platformKey) {
+					if (!config[platformKey]) {
+						config[platformKey] = platform;
+					}
+				});
 			}
 		}
 

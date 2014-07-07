@@ -1,6 +1,3 @@
-var _ = require("lodash"),
-	utils = require("../utils");
-
 
 /**
 	phrase push FILE|DIRECTORY
@@ -20,15 +17,13 @@ module.exports = {
 		_.each(platformData.tags, function (tagData, tagName) {
 			var commandText;
 			commandText = 
-				"push ../" + platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format) +
-				" --tags=" + tagName + 
+				"push --tags=" + tagName + 
 				" --format=" + platformData.format +
 				" --locale=" + locale
 			;
 			utils.phrase(commandText, function (res) {
-				debugger;
-				utils.dumpMessage(res, "pushing " + locale);
-			}, false);
+				utils.dumpMessage(res, "Initializing");
+			});
 		});
 	}
 };
