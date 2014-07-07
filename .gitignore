@@ -1,4 +1,4 @@
-config.json
-localConfig.json
+config/*.json
 .phrase
 node_modules
+phraseData
