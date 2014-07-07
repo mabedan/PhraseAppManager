@@ -1,7 +1,7 @@
 {
-	"platforms" : {
+	"platforms" : { //if platforms specified, only the keys defined in the object is enabled.
 		"ios" : {
-			"folder" : "different/path/example/ios"
+			"path" : "different/path/example/ios"//if path defined, it will be used instead of the default provided in config.json
 		}
 	}
 }
