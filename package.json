@@ -4,6 +4,7 @@
 	"dependencies": {
 		"requirejs": ">= 0.0.1", 
 	  	"lodash": ">= 0.0.1",
+	  	"colors": ">= 0.0.1",
 	  	"stdio": ">= 0.0.1",
 	  	"js-schema": ">= 0.0.1",
 	  	"underscore.string" : ">= 0.0.1"

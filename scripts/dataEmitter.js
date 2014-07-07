@@ -16,19 +16,21 @@ var _ = require("lodash"),
 **/
 
 module.exports = {
-	emit: function (platformData, locale) {
+	emit: function (platformData, platformName, locale) {
 		_.each(platformData.tags, function (tagData, tagName) {
 			var commandText;
+
+
 			commandText = 
-				"push ../" + platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format) +
-				" --tags=" + tagName + 
+				"push ../" + platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format)+
+				" --tags=" + "PND-" + tagName + "-in-platform-" + platformName +
 				" --format=" + platformData.format +
 				" --locale=" + locale
 			;
+			console.log(commandText);
 			utils.phrase(commandText, function (res) {
-				debugger;
-				utils.dumpMessage(res, "pushing " + locale);
-			}, false);
+				utils.dumpMessage(res, "pushing " + locale + " for " + platformName);
+			});
 		});
 	}
 };

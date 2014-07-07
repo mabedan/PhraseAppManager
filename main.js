@@ -20,16 +20,17 @@ if (!fs.existsSync("phraseData")) {
 if (ops.init) {
 	initialize.execute(ops);
 } else if (ops.push) {
+	debugger;
 	config.update();
 	_.each(config.locales, function (locale) {
-		_.each(config.platforms, function (platform) {
-			dataEmitter.emit(platform, locale);
+		_.each(config.platforms, function (platform, platformName) {
+			dataEmitter.emit(platform, platformName, locale);
 		});
 	});
 } else {	
 	_.each(config.locales, function (locale) {
-		_.each(config.platforms, function (platform) {
-			dataEmitter.emit(platform, locale);
+		_.each(config.platforms, function (platform, platformName) {
+			dataEmitter.emit(platform, platformName, locale);
 		});
 	});
 }

@@ -42,16 +42,15 @@ var returnObject = {
 
 		if (localConfig) {
 			if (localConfig.platforms) {
-				config.platforms = _.filter(config.platforms, function (platform, platformKey) {
+				_.each(_.keys(config.platforms), function (platformKey) {
 					var newPath;
 					if (localConfig.platforms[platformKey]) { 
 						newPath = localConfig.platforms[platformKey].path;
 						if (newPath) {
-							platform.path = newPath;
+							config.platforms[platformKey].path = newPath;
 						}
-						return true;
 					} else {
-						return false;
+						delete config.platforms[platform];
 					}
 				});
 				_.each(localConfig.platforms, function (platform, platformKey) {
