@@ -16,10 +16,13 @@ var _ = require("lodash"),
 **/
 
 module.exports = {
-	emit: function (platformData, platformName, locale) {
-		_.each(platformData.tags, function (tagData, tagName) {
-			var commandText;
+	emit: function (platformData, platformName, locale, force) {
+		var tags = _.keys(platformData.tags);
 
+		function reccursiveCall(tagIndex) {
+			var tagName = tags[tagIndex], 
+				tagData = platformData.tags[tagName],
+				commandText;
 
 			commandText = 
 				"push ../" + platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format)+
@@ -27,10 +30,20 @@ module.exports = {
 				" --format=" + platformData.format +
 				" --locale=" + locale
 			;
+			if (force) {
+				commandText+= " --force-update-translations";
+			}
+
 			console.log(commandText);
 			utils.phrase(commandText, function (res) {
 				utils.dumpMessage(res, "pushing " + locale + " for " + platformName);
+				tagIndex++;
+				if (tagIndex < tags.length) {
+					reccursiveCall(tagIndex);
+				}
 			});
-		});
+		}
+		reccursiveCall(0);
 	}
 };
+
