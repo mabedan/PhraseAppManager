@@ -1,6 +1,7 @@
 {
 	"platforms" : {
 		"ios" : {
+			"regionSeparator": "-",
 			"folder" : "my-iOS-files",//can be overriden in localConfig.json (in .gitignore)
 			"format" : "strings",
 			"tags" : [
@@ -15,6 +16,7 @@
 			]
 		},
 		"android": {
+			"regionSeparator": "-r",
 			"folder": "my-Android-files",
 			"format": "xml",
 			"tags" : [

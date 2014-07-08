@@ -27,7 +27,28 @@ module.exports = {
 			var tagName = tags[tagIndex], 
 				tagData = platformData.tags[tagName],
 				commandText,
-				tmpFilePath = "./tmp-"+locale+"/" + tagName + "-in-platform-" + platformName;
+				tmpFilePath;
+
+			function callNext () {
+				tagIndex++;
+				if (tagIndex < tags.length) {
+					reccursiveCall(tagIndex);	
+				} else {
+					rimraf("phraseData/tmp-"+locale, function () {});
+				}
+			}
+
+			var destinationPath = platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format);
+			
+			if (!fs.existsSync(destinationPath)) {	
+				utils.verbosLog("Skipping pull data for "+ platformName+" in "+locale+" locale.");
+				callNext();
+				return;
+			}
+
+			utils.verbosLog("Starting to pull data for "+ platformName+" in "+locale+" locale.");
+
+			tmpFilePath = "./tmp-"+locale+"/" + tagName + "-in-platform-" + platformName;
 			
 			commandText = 
 				"pull " + locale +
@@ -36,32 +57,19 @@ module.exports = {
 				" --format=" + platformData.format
 			;
 
-			console.log( commandText);
-
-			debugger;
 			function pullFromPhrase () {
 				utils.phrase(commandText, function (res) {
 					var foundFiles = glob.sync("phraseData/tmp-"+locale+"/**/*."+platformData.format);
-
-					var newPath = platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format);
+					debugger;
 					var newbuffer = fs.readFileSync(foundFiles[0]);
-					
 
-					console.log(process.cwd());
-					console.log(fs.readdirSync("."));
-										
+					utils.verbosLog("data delivered from PhraseApp");
+
 					fs.writeFileSync(newPath, newbuffer);
-					
 
+					utils.verbosLog("Finished writing data for "+ platformName+" in "+locale+" locale.");
 
-
-
-					tagIndex++;
-					if (tagIndex < tags.length) {
-						reccursiveCall(tagIndex);	
-					} else {
-						rimraf("phraseData/tmp-"+locale, function () {});
-					}
+					callNext();
 				});
 			}
 

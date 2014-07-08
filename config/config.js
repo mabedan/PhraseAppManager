@@ -1,10 +1,12 @@
 var fs = require("fs"),
+	utils = require("../utils"),
 	_ = require("lodash"),
 	schema = require("js-schema");
 
 var configSchema = schema({
 	platforms: {
 		"*": schema({
+			regionSeparator:String,
 			path: String,
 			format: String,
 			tags:{
@@ -37,7 +39,8 @@ var returnObject = {
 		var localConfig = readJson("./config/localConfig.json");
 
 		if(!configSchema(config)) {
-			throw(new Error("config file has invalide format"));
+			utils.verbosLog(JSON.stringify(config, null, 2));
+			throw(new Error("config.json file has invalide format"));
 		}
 
 		if (localConfig) {

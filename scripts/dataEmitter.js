@@ -1,4 +1,5 @@
 var _ = require("lodash"),
+	fs = require("fs"),
 	utils = require("../utils");
 
 
@@ -24,24 +25,43 @@ module.exports = {
 				tagData = platformData.tags[tagName],
 				commandText;
 
-			commandText = 
-				"push ../" + platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format)+
-				" --tags=" + "PND-" + tagName + "-in-platform-" + platformName +
-				" --format=" + platformData.format +
-				" --locale=" + locale
-			;
-			if (force) {
-				commandText+= " --force-update-translations";
-			}
-
-			console.log(commandText);
-			utils.phrase(commandText, function (res) {
-				utils.dumpMessage(res, "pushing " + locale + " for " + platformName);
+			function callNext () {
 				tagIndex++;
 				if (tagIndex < tags.length) {
 					reccursiveCall(tagIndex);
 				}
-			});
+			}
+			
+			path = 
+				platformData.path + "/" + 
+				tagData.destinationFolder
+					.replace(/<locale>/g, locale.replace(/-/g, platformData.regionSeparator))
+					.replace(/<format>/g, platformData.format);
+			
+			if (fs.existsSync(path)) {
+
+				commandText = 
+					"push ../" + path +
+					" --tags=" + "PND-" + tagName + "-in-platform-" + platformName +
+					" --format=" + platformData.format +
+					" --locale=" + locale
+				;
+
+				if (force) {
+					commandText+= " --force-update-translations";
+				}
+
+				utils.verbosLog("starting to push data for "+ platformName+" in "+locale+" locale.");
+
+				utils.phrase(commandText, function (res) {
+					utils.verbosLog("Finished pushinng data for "+ platformName+" in "+locale+" locale.");
+					callNext();
+				});
+
+			} else {
+				utils.verbosLog("Skipping pushing data for "+ platformName+" in "+locale+" locale.");
+				callNext();
+			}
 		}
 		reccursiveCall(0);
 	}
