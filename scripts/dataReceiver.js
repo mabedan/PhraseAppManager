@@ -60,12 +60,12 @@ module.exports = {
 			function pullFromPhrase () {
 				utils.phrase(commandText, function (res) {
 					var foundFiles = glob.sync("phraseData/tmp-"+locale+"/**/*."+platformData.format);
-					debugger;
+
 					var newbuffer = fs.readFileSync(foundFiles[0]);
 
 					utils.verbosLog("data delivered from PhraseApp");
-
-					fs.writeFileSync(newPath, newbuffer);
+					
+					fs.writeFileSync(destinationPath, newbuffer);
 
 					utils.verbosLog("Finished writing data for "+ platformName+" in "+locale+" locale.");
 
