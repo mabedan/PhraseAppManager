@@ -53,7 +53,7 @@ var returnObject = {
 							config.platforms[platformKey].path = newPath;
 						}
 					} else {
-						delete config.platforms[platform];
+						delete config.platforms[platformKey];
 					}
 				});
 				_.each(localConfig.platforms, function (platform, platformKey) {
