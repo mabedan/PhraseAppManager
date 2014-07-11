@@ -8,20 +8,23 @@ You can Manage as many projects as you have, and have different affected files f
 
 ###Getting started
 
-Create config.json file and insert information about your different projects and different locals. Refer to `config.json.example` for more information.
+Create config.json file and insert information about your different projects and different locals. Refer to `projectConfig.json.example` for more information.
 
-###Connecting to PhraseApp
+###Connecting to PhraseApp server
 
 Find your Auth key in PhraseApp project settings, and use it in this command.
 
-    node main.js -i <Your auth key here>
+    node main.js -i <YOUR AUTH KEY HERE>
 
 ###Pulling info from PhraseApp into local projects
 
-This operation will replace all existing localization files using the info from PhraseApp
+This operation will _replace all existing localization files_ using the info from PhraseApp
 
     node main.js -l
-###pushing new keys to PhraseApp info into local projects
+    
+We have decided to let the merge happen in the cloud. Once you push your local changes, and pull again, you will received the merged information.
+    
+###Pushing new keys to PhraseApp info into local projects
 
 This will post the _new_ key/values found in your localization files. The next time you pull, translations will go to the right destinations as specified in the config file.
     
