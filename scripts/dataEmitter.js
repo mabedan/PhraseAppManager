@@ -34,7 +34,7 @@ module.exports = {
 			
 			path = 
 				platformData.path + "/" + 
-				tagData.destinationFolder
+				tagData.destinationFile
 					.replace(/<locale>/g, locale.replace(/-/g, platformData.regionSeparator))
 					.replace(/<format>/g, platformData.format);
 			

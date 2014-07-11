@@ -2,16 +2,16 @@
 	"platforms" : {
 		"ios" : {
 			"regionSeparator": "-",
-			"folder" : "my-iOS-files",//can be overriden in localConfig.json (in .gitignore)
+			"folder" : "my-iOS-files",//can be overriden in userConfig.json (in .gitignore)
 			"format" : "strings",
 			"tags" : [
 				{
 					"name" : "iphone-storyboard",
-					"destinationFolder": "MyProject/<locale>.lproj/Main_iPhone.<format>"
+					"destinationFile": "MyProject/<locale>.lproj/Main_iPhone.<format>"
 				},
 				{
 					"name" : "in-source",
-					"destinationFolder": "MyProject/<locale>.lproj/Localizable.<format>"
+					"destinationFile": "MyProject/<locale>.lproj/Localizable.<format>"
 				}
 			]
 		},
@@ -22,7 +22,7 @@
 			"tags" : [
 				{
 					"name" : "iphone-storyboard",
-					"destinationFolder": "MyProject/res/values<locale>/strings.<format>"
+					"destinationFile": "MyProject/res/values<locale>/strings.<format>"
 				}
 			]
 		}

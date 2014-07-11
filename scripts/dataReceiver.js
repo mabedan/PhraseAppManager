@@ -38,7 +38,7 @@ module.exports = {
 				}
 			}
 
-			var destinationPath = platformData.path + "/" + tagData.destinationFolder.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format);
+			var destinationPath = platformData.path + "/" + tagData.destinationFile.replace(/<locale>/g, locale).replace(/<format>/g, platformData.format);
 			
 			if (!fs.existsSync(destinationPath)) {	
 				utils.verbosLog("Skipping pull data for "+ platformName+" in "+locale+" locale.");

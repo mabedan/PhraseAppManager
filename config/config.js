@@ -11,7 +11,7 @@ var configSchema = schema({
 			format: String,
 			tags:{
 				"*": {
-					destinationFolder: /[\S]*<locale>[\S]*\.<format>/
+					destinationFile: /[\S]*<locale>[\S]*\.<format>/
 				}	
 			} 
 		})
@@ -35,12 +35,12 @@ function readJson (path, errorMessage) {
 
 var returnObject = {
 	update : function () {
-		var config = readJson("./config/config.json", "Config.json file should exist.");
-		var localConfig = readJson("./config/localConfig.json");
+		var config = readJson("./config/projectConfig.json", "projectConfig.json file should exist.");
+		var localConfig = readJson("./config/userConfig.json");
 
 		if(!configSchema(config)) {
 			utils.verbosLog(JSON.stringify(config, null, 2));
-			throw(new Error("config.json file has invalide format"));
+			throw(new Error("projectConfig.json file has invalide format"));
 		}
 
 		if (localConfig) {
