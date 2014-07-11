@@ -36,4 +36,4 @@ In order to force the translation for existing keys in PhraseApp, use the `-f` f
 
 At any point you can use `node main.js --help` for instructions.
 
-`node main.js -v` will execute your operation in verbos mpde.
+`node main.js -v` will execute your operation in verbos mode.
